@@ -1,0 +1,263 @@
+{{> layout/header2}}
+
+<body>
+	<div class="wrapper">
+
+		<div class="main-panel">
+
+			{{! 테이블 자리 }}
+			<div id="page-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12 ">
+							<h1 class="page-header">상품 정보</h1>
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+
+					<div class="col-md-10 container-jCenter ">
+						<div class="card login-panel panel panel-default ">
+							<div class="panel-heading">
+								<h3 class="panel-title">등록할 상품의 정보를 확인하세요</h3>
+							</div>
+							<div class="content pa-5">
+								<div>
+									<form name="product">
+										{{#wProduct}}
+											<input id="wproductId" value="{{Id}}" disabled hidden>
+											<div class="row">
+												<div class="col-md-12 ">
+													<div class="form-group">
+														<label for="Seller">product Seller</label>
+														<input type="text" id="Seller" class="form-control required"
+														       value="{{seller.username}}" disabled/>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for="productName">product Name</label>
+														<input type="text" class="form-control required" id="productName" value="{{wProductName}}"
+														       disabled/>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12 ">
+													<div class="form-group">
+														<label for="productContent">product Content</label>
+														<input type="text" id="productContent" class="form-control required"
+														       value="{{wProductContent}}" disabled/>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for="categoryId">category Type</label>
+														<input type="text" id="categoryId" class="form-control required"
+														       value="{{category.categoryType}}" disabled/>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group ">
+														<label>메인 미리보기 이미지</label>
+														<div>
+															<img src="{{wProductThumbnail}}" id="mainPreview"
+															     style="max-width: 200px; max-height: 200px;" onclick="openImage('mainPreview')"
+															     disabled/>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>상세 미리보기 이미지</label>
+														<div>
+															<img src="{{wProductDetailPic}}" id="detailPreview"
+															     style="max-width: 200px; max-height: 200px;" onclick="openImage('detailPreview')"
+															     disabled/>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="discountRate">할인율(%)</label>
+														<input type="number" id="discountRate" class="form-control required"
+														       oninput="checkDiscountRate(this)" value="{{wDiscountRate}}" disabled/>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="item form-group">
+														<label class="label-align" for="discountExpiredAt">할인 마감일</label>
+														<div class="">
+															<input id="discountExpiredAt" class="date-picker form-control required" type="text" disabled
+															       type="text" value="{{wDiscountExpiredAt}}"/>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										{{/wProduct}}
+										{{#wOptionList}}
+											<div class="row">
+												<div class="col-md-12">
+													<div class="content pa-5">
+														<div>
+															<div class="card login-panel panel panel-default">
+
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label for="optionName0">option Name</label>
+																			<input type="text" class="form-control required" id="optionName0"
+																			       value="{{wOptionName}}" disabled/>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label for="optionPrice0">option price</label>
+																			<input type="number" class="form-control required" id="optionPrice0"
+																			       value="{{wOptionPrice}}" disabled/>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="row">
+																	<div class=" col-md-12">
+																		<div class="form-group">
+																			<label for="optionStack0">option stack</label>
+																			<input type="number" class="form-control required" id="optionStack0"
+																			       value="{{wOptionStack}}" disabled/>
+																		</div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										{{/wOptionList}}
+
+
+										{{#isAdmin}}
+											<button type="button" class="btn btn-info btn-fill pull-right" onclick="acceptProduct()">
+												상품 승인
+											</button>
+											<button type="button" class="btn btn-info btn-fill pull-right" onclick="rejectProduct()">
+												상품 거절
+											</button>
+										{{/isAdmin}}
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+
+			function previewImage(inputId, imgId) {
+				var input = document.getElementById(inputId);
+				var preview = document.getElementById(imgId);
+				var file = input.files[0];
+				var reader = new FileReader();
+
+				if (file) {
+					reader.readAsDataURL(file);
+					reader.onload = function () {
+						preview.src = reader.result;
+					};
+				} else {
+					preview.src = ""; // 이미지가 선택되지 않은 경우 미리보기를 지우기
+				}
+			}
+
+			function openImage(imageId) {
+				var image = document.getElementById(imageId);
+				var imageURL = image.src;
+
+				if (imageURL) {
+					var newWindow = window.open('', '', 'width=800,height=600');
+					newWindow.document.write('<img src="' + imageURL + '" style="max-width: 650%; max-height: 650%;" />');
+					newWindow.resizeTo(screen.availWidth, screen.availHeight);
+
+				}
+			}
+
+			async function acceptProduct() {
+
+
+				let wproductId = $("#wproductId").val();
+				console.log(wproductId);
+
+				let response = await fetch("/admin/product/waiting/accept/" + wproductId, {
+					method: "post",
+				});
+
+				let responseBody = await response.json();
+
+
+				if (responseBody.success) {
+					var parentWindow = window.opener;
+
+					// 이전 창 새로고침
+					if (parentWindow) {
+						parentWindow.location.reload();
+					}
+
+					// 지금 창 닫기
+					window.close();
+				} else {
+					alert(responseBody.data);
+				}
+			}
+
+			async function rejectProduct() {
+
+
+				let wrejectId = $("#wproductId").val();
+				console.log(wproductId);
+
+				let response = await fetch("/admin/product/waiting/reject/" + wrejectId, {
+					method: "post",
+				});
+
+
+				let responseBody = await response.json();
+
+				if (responseBody.success) {
+
+					var parentWindow = window.opener;
+
+					// 이전 창 새로고침
+					if (parentWindow) {
+						parentWindow.location.reload();
+					}
+
+					// 지금 창 닫기
+					window.close();
+				} else {
+					alert(responseBody.data);
+				}
+			}
+		</script>
+
+{{> layout/footer}}

@@ -1,0 +1,59 @@
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+  port: 8080
+  tomcat:
+    additional-tld-skip-patterns: "*.jar"
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      encoding: utf-8
+      data-locations:
+        - classpath:db/data.sql
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      default_batch_fetch_size: 100
+    open-in-view: true
+  output:
+    ansi:
+      enabled: always
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  mustache:
+    prefix: classpath:/templates/
+    suffix: .mustache
+    expose-request-attributes: true
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+logging:
+  level:
+    "[shop.mtcoding.marketkurly]": debug
+    "[org.hibernate.type]": TRACE
+
+file:
+  path: ./images/
+jwt:
+  secret: 8593eccff73368ea5480bbdd4750ea78a215ea658c6d6a744721986eb05c5280306b85d41f3cd8ad403bf97fef6c41666ab4d722c5cf24e8942ef31bded66eb6
+  atk:
+    expire: 3600 #s

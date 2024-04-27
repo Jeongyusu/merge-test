@@ -1,0 +1,245 @@
+{{> layout/header2}}
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
+      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="https://github.com/Jeongyusu/market-kurly-server" class="simple-text"> 마켓 컬리 </a>
+        </div>
+
+	      <ul class="nav">
+        {{#isAdmin}}
+		      <li>
+			      <a href="/admin">
+				      <i class="pe-7s-graph"></i>
+				      <p>판매 요청 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="/admin/question">
+				      <i class="pe-7s-news-paper"></i>
+				      <p>문의 관리</p>
+			      </a>
+		      </li>
+		      <li class="active">
+			      <a href="/admin/coupon">
+				      <i class="pe-7s-photo-gallery"></i>
+				      <p>쿠폰 관리</p>
+			      </a>
+		      </li>
+		      <li >
+			      <a href="/notice">
+				      <i class="pe-7s-note2"></i>
+				      <p>공지 목록</p>
+			      </a>
+		      </li>
+          {{/isAdmin}}
+          {{#isSeller}}
+		      <li>
+			      <a href="/seller">
+				      <i class="pe-7s-graph"></i>
+				      <p>판매 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="">
+				      <i class="pe-7s-news-paper"></i>
+				      <p>문의 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="/seller/product">
+				      <i class="pe-7s-science"></i>
+				      <p>상품 관리</p>
+			      </a>
+		      </li>
+		      <li class="active">
+			      <a href="/notice">
+				      <i class="pe-7s-bell"></i>
+				      <p>공지 목록</p>
+			      </a>
+		      </li>
+          {{/isSeller}}
+		      <li class="active-pro">
+			      <a href="https://github.com/Jeongyusu/market-kurly-server">
+				      <i class="pe-7s-rocket"></i>
+				      <p>Link TO TeaMGit</p>
+			      </a>
+		      </li>
+	      </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="">
+                  <p>Account</p>
+                </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <p>
+                    Dropdown
+                    <b class="caret"></b>
+                  </p>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/logout">
+                  <p>Log out</p>
+                </a>
+              </li>
+              <li class="separator hidden-lg hidden-md"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-nCenter pa-15">
+        <div class="card login-panel panel panel-default height-900">
+
+          <div class="panel-heading">
+            <h3 class="panel-title">쿠폰 작성</h3>
+          </div>
+          <div class="content">
+            <form action="/admin/coupon/save" method="post" enctype="application/x-www-form-urlencoded">
+
+              <div class=" row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Coupon title</label>
+                    <input type="text" id="" class="form-control" name="couponName" placeholder="쿠폰 이름" value=""
+                      required />
+                  </div>
+                </div>
+              </div>
+
+              <div class=" row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Coupon Number</label>
+                    <input type="text" id="" class="form-control" name="" placeholder="쿠폰 번호는 랜덤 16자리가 부여됩니다." value=""
+                      disabled />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row container-nCenter">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Reduce Amount</label>
+                    <input type="number" id="reduceAmount" class="form-control" name="reduceAmount" placeholder="할인액"
+                      value="" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Coupon Expired</label>
+                    <select class="form-control required" name="isExpired" id="isExpired" required>
+                      <option>false</option>
+                      <option>true</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row container-nCenter">
+                <div class="col-md-6">
+                  <div class="item form-group">
+                    <label class="label-align" for="couponCreatedAt">쿠폰 시작일</label>
+                    <div class="">
+                      <input id="couponCreatedAt" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text"
+                        required="required" type="text" onfocus="this.type='date'" name="couponCreatedAt"
+                        onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+                        onmouseout="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="item form-group">
+                    <label class="label-align" for="couponExpiredAt">쿠폰 만료일</label>
+                    <div class="">
+                      <input id="couponExpiredAt" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text"
+                        required="required" type="text" onfocus="this.type='date'" name="couponExpiredAt"
+                        onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+                        onmouseout="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div>
+                      <label>Notice Content</label>
+                      <textarea rows="10" cols="50" style="width: 570px; height: 280px; resize: none;"
+                        placeholder="쿠폰 내용을 입력하세요" name="couponContent" id="couponContent" required></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-info btn-fill pull-right"">
+                    쿠폰 등록
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+      <script>
+
+        function getCurrentDate() {
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); // 0부터 시작하므로 +1
+          var yyyy = today.getFullYear();
+
+          return yyyy + '-' + mm + '-' + dd;
+        }
+
+        // 최소 날짜를 설정
+        var dateInput1 = document.getElementById('couponCreatedAt');
+        var dateInput2 = document.getElementById('couponExpiredAt');
+        dateInput1.min = getCurrentDate();
+        dateInput2.min = getCurrentDate();
+
+
+        // 날짜 조건을 설정
+        function checkExpirationDate() {
+          var startDate = new Date(document.getElementById('couponCreatedAt').value);
+          var endDate = new Date(document.getElementById('couponExpiredAt').value);
+
+          if (endDate <= startDate) {
+            alert(" 쿠폰 만료일은 쿠폰 시작일보다 커야 합니다."); document.getElementById('couponExpiredAt').value = "";
+          }
+        }
+        dateInput2.addEventListener('change', checkExpirationDate); dateInput1.addEventListener('change',
+          checkExpirationDate); </script>
+
+                    {{> layout/footer2}}

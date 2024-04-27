@@ -1,0 +1,139 @@
+{{> layout/header2}}
+
+<body>
+	<div class="wrapper">
+		<div class="main-panel">
+
+			<div class="pa-15">
+				<div class="card login-panel panel panel-default height-900">
+
+					<div class="panel-heading">
+						<h3 class="panel-title">쿠폰 상세</h3>
+					</div>
+					<div class="content">
+
+						<div class=" pull-right mr-15">
+							<h5>작성자 : Market Kurly </h5>
+						</div>
+						<form action="/admin/notice/save" method="post" enctype="application/x-www-form-urlencoded">
+							{{#coupon}}
+
+								<div class=" row" hidden>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Coupon Id</label>
+											<input type="text" id="" class="form-control" name="" placeholder="쿠폰 번호" value="{{id}}" disabled/>
+										</div>
+									</div>
+								</div>
+
+								<div class=" row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Coupon title</label>
+											<input type="text" id="" class="form-control" name="" placeholder="쿠폰 이름" value="{{couponName}}" disabled/>
+										</div>
+									</div>
+								</div>
+
+								<div class=" row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Coupon Number</label>
+											<input type="text" id="" class="form-control" name="" placeholder="쿠폰 번호" value="{{couponNumber}}" disabled/>
+										</div>
+									</div>
+								</div>
+
+								<div class="row container-nCenter">
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Reduce Amount</label>
+											<input type="number" id="" class="form-control" name="" placeholder="할인액" value="{{reduceAmount}}" disabled/>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Coupon Count type</label>
+											<input type="number" id="" class="form-control" name="" placeholder="쿠폰 사용 횟수" value="{{couponCount}}" disabled/>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Coupon Expired</label>
+											<input type="number" id="" class="form-control" name="" placeholder="False" value="{{isExpired}}" disabled/>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row container-nCenter">
+									<div class="col-md-6">
+										<div class="item form-group">
+											<label class="label-align" for="discountExpiredAt">쿠폰 시작일</label>
+											<div class="">
+												<input id="discountExpiredAt" class="date-picker form-control required" placeholder="dd-mm-yyyy"
+												       type="text" required="required" type="text" onfocus="this.type='date'" disabled
+												       onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+												       onmouseout="" value="{{couponCreatedAt}}"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="item form-group">
+											<label class="label-align" for="discountExpiredAt">쿠폰 만료일</label>
+											<div class="">
+												<input id="discountExpiredAt" class="date-picker form-control required" placeholder="dd-mm-yyyy"
+												       type="text" required="required" type="text" onfocus="this.type='date'" disabled
+												       onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
+												       onmouseout="" value="{{couponExpiredAt}}"/>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class=" row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Coupon Content</label>
+											<textarea rows="10" cols="50" style="width: 570px; height: 350px; resize: none;"
+											          placeholder="쿠폰 내용" name="noticeContent" id="noticeContent" disabled> {{couponContent}}</textarea>
+										</div>
+									</div>
+								</div>
+
+								<button hidden type="button" class="btn btn-info btn-fill pull-right" onclick="deleteCoupon({{id}})">
+									쿠폰 삭제
+								</button>
+							{{/coupon}}
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<script>
+
+				async function deleteCoupon(couponId) {
+
+
+					let response = await fetch("/admin/coupon/delete/" + couponId, {
+						method: "get",
+					});
+
+
+					var parentWindow = window.opener;
+
+					// 이전 창 새로고침
+					if (parentWindow) {
+						parentWindow.location.reload();
+					}
+
+					// 지금 창 닫기
+					window.close();
+				}
+
+			</script>
+
+{{> layout/footer}}

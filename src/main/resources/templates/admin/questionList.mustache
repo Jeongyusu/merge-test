@@ -1,0 +1,225 @@
+{{> layout/header2}}
+
+<body>
+	<div class="wrapper">
+		<div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
+			<!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+			<div class="sidebar-wrapper">
+				<div class="logo">
+					<a href="https://github.com/Jeongyusu/market-kurly-server" class="simple-text"> 마켓 컬리 </a>
+				</div>
+
+				<ul class="nav">
+				{{#isAdmin}}
+					<li>
+						<a href="/admin">
+							<i class="pe-7s-graph"></i>
+							<p>판매 요청 관리</p>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/admin/question">
+							<i class="pe-7s-news-paper"></i>
+							<p>문의 관리</p>
+						</a>
+					</li>
+					<li >
+						<a href="/admin/coupon">
+							<i class="pe-7s-photo-gallery"></i>
+							<p>쿠폰 관리</p>
+						</a>
+					</li>
+					<li>
+						<a href="/notice">
+							<i class="pe-7s-note2"></i>
+							<p>공지 목록</p>
+						</a>
+					</li>
+					{{/isAdmin}}
+					{{#isSeller}}
+					<li>
+						<a href="/seller">
+							<i class="pe-7s-graph"></i>
+							<p>판매 관리</p>
+						</a>
+					</li>
+					<li>
+						<a href="/seller/question">
+							<i class="pe-7s-news-paper"></i>
+							<p>문의 관리</p>
+						</a>
+					</li>
+					<li>
+						<a href="/seller/product">
+							<i class="pe-7s-science"></i>
+							<p>상품 관리</p>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/notice">
+							<i class="pe-7s-bell"></i>
+							<p>공지 목록</p>
+						</a>
+					</li>
+					{{/isSeller}}
+					<li class="active-pro">
+						<a href="https://github.com/Jeongyusu/market-kurly-server">
+							<i class="pe-7s-rocket"></i>
+							<p>Link TO TeaMGit</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="main-panel">
+			<nav class="navbar navbar-default navbar-fixed">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="">
+									<p>Account</p>
+								</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<p>
+										Dropdown
+										<b class="caret"></b>
+									</p>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="/logout">
+									<p>Log out</p>
+								</a>
+							</li>
+							<li class="separator hidden-lg hidden-md"></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="content table-responsive table-full-width">
+									{{! 테이블 자리 }}
+									<div id="page-wrapper">
+										<div class="container-fluid">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4>문의 사항</h4>
+												</div>
+												<!-- /.panel-heading -->
+												<div class="panel-body">
+													<div class="table-responsive">
+														<table class="table table-striped table-bordered table-hover" id="custom-table">
+															<thead>
+																<tr>
+																	<th class="three">QuestionType</th>
+																	<th class="three">QuestionTitle</th>
+																	<th class="one">UserName</th>
+																	<th class="one">Answered</th>
+																	<th class="one">EmailAccepted</th>
+																	<th class="one">CreatedAt</th>
+																</tr>
+															</thead>
+															<tbody>
+																{{# noAnwseredAQ}}
+																	<tr class="odd gradeX">
+																		<td class="three" onclick=openQuestionDetail({{id}})>{{adminQuestionType}}</td>
+																		<td class="three">{{adminQuestionTitle}}</td>
+																		<td class="one">{{username}}</td>
+																		<td class="one">답변 대기</td>
+																		<td class="one">{{isEmailAccepted}}</td>
+																		<td class="one">{{adminQuestionCreatedAt}}</td>
+																	</tr>
+																{{/ noAnwseredAQ}}
+															</tbody>
+														</table>
+													</div>
+													<!-- /.table-responsive -->
+												</div>
+												<!-- /.panel-body -->
+											</div>
+											<!-- /.row -->
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4>답변 완료</h4>
+												</div>
+												<!-- /.panel-heading -->
+												<div class="panel-body">
+													<div class="table-responsive">
+														<table class="table table-striped table-bordered table-hover" id="custom-table">
+															<thead>
+																<tr>
+																	<th class="three">QuestionType</th>
+																	<th class="three">QuestionTitle</th>
+																	<th class="one">UserName</th>
+																	<th class="one">Answered</th>
+																	<th class="one">EmailAccepted</th>
+																	<th class="one">CreatedAt</th>
+																</tr>
+															</thead>
+															<tbody>
+																{{# anwseredAQ}}
+																	<tr class="odd gradeX">
+																		<td class="three" onclick=openQuestionDetail({{id}})>{{adminQuestionType}}</td>
+																		<td class="three">{{adminQuestionTitle}}</td>
+																		<td class="one">{{username}}</td>
+																		<td class="one">답변 완료</td>
+																		<td class="one">{{isEmailAccepted}}</td>
+																		<td class="one">{{adminQuestionCreatedAt}}</td>
+																	</tr>
+																{{/ anwseredAQ}}
+															</tbody>
+														</table>
+													</div>
+													<!-- /.table-responsive -->
+												</div>
+												<!-- /.panel-body -->
+											</div>
+											<!-- /.row -->
+										</div>
+										<!-- /.container-fluid -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<script>
+
+				function openQuestionDetail(questionId) {
+					var questionDetailUrl = "/admin/question/detail/" + questionId;
+					// 새 창을 열기
+					window.open(questionDetailUrl, "couponDetailWindow", "width=1000,height=1200,resizable=no");
+				}
+
+			</script>
+
+{{> layout/footer2}}

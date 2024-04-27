@@ -1,0 +1,131 @@
+[33mcommit 4226a07a30d2d6916fbaa3d7c2db6c8ba8cb0cb2[m[33m ([m[1;36mHEAD -> [m[1;32mKHY/TOKEN[m[33m)[m
+Merge: de3e4f2 b75eba4
+Author: KimHaYu <z2poter@naver.com>
+Date:   Thu Oct 26 14:47:13 2023 +0900
+
+    Merge branch 'dev' into KHY/TOKEN
+
+[33mcommit de3e4f2e78bf085008ad714c085d48fe7638c056[m[33m ([m[1;31morigin/KHY/TOKEN[m[33m)[m
+Author: KimHaYu <z2poter@naver.com>
+Date:   Thu Oct 26 01:39:48 2023 +0900
+
+    토큰가져오기 및 오류수정
+
+[33mcommit b75eba4b37812aa16c9fd9c27ee71b4d86bdb5b2[m[33m ([m[1;31morigin/dev[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdev[m[33m)[m
+Merge: a47e103 a0380d5
+Author: Jeongyusu <130957655+Jeongyusu@users.noreply.github.com>
+Date:   Wed Oct 25 18:01:23 2023 +0900
+
+    카테고리 완료 #7 from Jeongyusu/category
+    
+    [김대현] 카테고리
+
+[33mcommit a0380d52e091ef4b7dc6d13cef4d064649560181[m
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 17:57:02 2023 +0900
+
+    [김대현] 카테고리 더미, 로직구현
+
+[33mcommit 96b1605a24fe1a82b50f1cc80c54a6c0149e6b3a[m
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 15:10:50 2023 +0900
+
+    [김대현] categoryTest 클래스 작성
+
+[33mcommit a47e10346abd5ed446959e4f604716352c17873d[m
+Merge: 49c42aa 77bbadb
+Author: Jeongyusu <130957655+Jeongyusu@users.noreply.github.com>
+Date:   Wed Oct 25 14:47:45 2023 +0900
+
+    category에 pic필드 추가 #5 from Jeongyusu/baseSettingUpdate
+    
+    [김대현] category에 pic필드 추가
+
+[33mcommit 77bbadbbcaeead28377221ab180ff6cab1273ce2[m
+Merge: 4ee2e73 49c42aa
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 14:46:21 2023 +0900
+
+    [김대현] image 파일 추가, category 필드 추가
+
+[33mcommit 49c42aa0d284c4b2456e21c03b8fc7862f953706[m
+Merge: 8552305 77f1c2c
+Author: Jeongyusu <130957655+Jeongyusu@users.noreply.github.com>
+Date:   Wed Oct 25 14:39:17 2023 +0900
+
+    비밀번호 해시설정 from Jeongyusu/KHY/passwordHash
+    
+    [김하율]비밀번호 해시설정
+
+[33mcommit 4ee2e7328cfc277a50963e760f01f4febc1bc984[m
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 14:38:35 2023 +0900
+
+    [김대현] 기본 사진 15개 추가
+
+[33mcommit 77f1c2cf897379ca6497fe754e65d9fdd6fb397e[m[33m ([m[1;31morigin/KHY/passwordHash[m[33m, [m[1;32mKHY/passwordHash[m[33m)[m
+Author: KimHaYu <z2poter@naver.com>
+Date:   Wed Oct 25 14:37:09 2023 +0900
+
+    [김하율]비밀번호 해시설정
+
+[33mcommit e5153e8a7496c3e7022b8cac413202c3920cffd6[m
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 14:33:50 2023 +0900
+
+    [김대현] category에 pic필드 추가
+
+[33mcommit 855230565e5ec9ef62ba53078fa2471d75279480[m
+Merge: 426cab6 d06fdc4
+Author: 김하율 <135561708+KimHaYu@users.noreply.github.com>
+Date:   Wed Oct 25 12:24:47 2023 +0900
+
+    Merge pull request #4 from Jeongyusu/KHY/userLoginJoin
+    
+    [김하율]/로그인 회원가입완료
+
+[33mcommit d06fdc423b082ce521efe49a3bfa551c9c6f59cc[m[33m ([m[1;31morigin/KHY/userLoginJoin[m[33m, [m[1;32mKHY/userLoginJoin[m[33m)[m
+Merge: ddd2557 426cab6
+Author: KimHaYu <z2poter@naver.com>
+Date:   Wed Oct 25 12:08:21 2023 +0900
+
+    [김하율]유저 로그인/회원가입
+
+[33mcommit ddd25572cef8e304fee8926d684dad4df76264ad[m
+Author: KimHaYu <z2poter@naver.com>
+Date:   Wed Oct 25 11:12:36 2023 +0900
+
+    잠시
+
+[33mcommit 426cab6c29255e9d7aaa461bd1360a9d8bb3e5dd[m
+Merge: 809f506 1f3e9e7
+Author: Jeongyusu <130957655+Jeongyusu@users.noreply.github.com>
+Date:   Wed Oct 25 10:52:42 2023 +0900
+
+    기본세팅 수정 from Jeongyusu/baseSettingUpdate
+    
+    [김대현] 기본세팅 수정
+
+[33mcommit 1f3e9e717d329ddc714e850da9d9012eac255038[m
+Author: MMGGHD <tldmseogus@naver.com>
+Date:   Wed Oct 25 10:20:49 2023 +0900
+
+    [김대현] 기본세팅 수정
+
+[33mcommit ba41d01f5a1491fd8ee1e0d7d2b51ef40b1bf43c[m
+Author: KimHaYu <z2poter@naver.com>
+Date:   Wed Oct 25 01:16:03 2023 +0900
+
+    [김하율] 유저 로그인 회원가입 구현
+
+[33mcommit 809f506182d5b2fa9eebae6e3a24807580618f44[m
+Author: Jys <onlys2545@naver.com>
+Date:   Tue Oct 24 22:12:55 2023 +0900
+
+    초기세팅 완료
+
+[33mcommit 0bc062eb4e8f7d6bec2ff69b2a470803ca87180b[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Jeongyusu <onlys2545@naver.com>
+Date:   Tue Oct 24 18:25:07 2023 +0900
+
+    초기세팅중

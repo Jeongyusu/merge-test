@@ -1,0 +1,144 @@
+{{> layout/header2}}
+
+<body>
+	<div class="wrapper">
+		<div class="main-panel">
+
+			<div class="pa-15">
+				<div class="card login-panel panel panel-default height-900">
+
+					<div class="panel-heading">
+						<h3 class="panel-title">문의 상세</h3>
+					</div>
+					<div class="content">
+						{{#adminQuestionDTO}}
+						<div class=" pull-right mr-15">
+							<h5>작성자 : {{username}} </h5>
+						</div>
+						<div class=" pull-right mr-15">
+							<h5>작성일 : {{adminQuestionCreatedAt}} </h5>
+						</div>
+						<form >
+							<div class=" row" hidden>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Coupon Id</label>
+										<input type="text" id="adminQuestionId" class="form-control" name="" placeholder="문의 번호"
+											value="{{id}}" disabled />
+									</div>
+								</div>
+							</div>
+
+							<div class=" row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Coupon title</label>
+										<input type="text" id="" class="form-control" name="" placeholder="문의 제목"
+											value="{{adminQuestionTitle}}" disabled />
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row container-nCenter">
+
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Reduce Amount</label>
+										<input type="number" id="" class="form-control" name="" placeholder="문의 타입"
+											value="{{adminQuestionType}}" disabled />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Coupon Count type</label>
+										<input type="number" id="" class="form-control" name="" placeholder="이메일 수신여부"
+											value="{{isEmailAccepted}}" disabled />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>Coupon Expired</label>
+										<input type="number" id="" class="form-control" name="" placeholder="답변 여부"
+											value="{{isAnswered}}" disabled />
+									</div>
+								</div>
+							</div>
+
+
+
+
+							<div class=" row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Coupon Content</label>
+										<textarea rows="10" cols="50" style="width: 570px; height: 350px; resize: none;"
+											placeholder="" name="" id=""
+											disabled>{{adminQuestionContent}}</textarea>
+									</div>
+								</div>
+							</div>
+							{{/adminQuestionDTO}}
+
+							<div class=" row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Reply</label>
+										{{#areplies}}
+										<input type="text" id="" class="form-control mt-5" name="" placeholder="문의 답변"
+											value="{{aReplyContent}}" disabled />
+										{{/areplies}}
+										<input type="text" id="reply" class="form-control mt-5" name="" placeholder="답변 작성하기"
+											value="" {{^isAdmin}}disabled{{/isAdmin}} />
+									</div>
+								</div>
+							</div>
+
+{{#isAdmin}}
+														<button type="button" class="btn btn-info btn-fill pull-right" onclick="replySave()">
+															답변 등록
+														</button>{{/isAdmin}}
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<script>
+
+  async function replySave() {
+
+    let replyContent = $("#reply").val();
+    let adminQuestionId = $("#adminQuestionId").val();
+
+    let data = {
+      	adminQuestionId: adminQuestionId,
+		replyContent : replyContent,
+    };
+
+    let response = await fetch("/admin/question/reply/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    let responseBody = await response.json();
+    if (responseBody.success) {
+
+      alert("답변 등록 성공");
+	location.reload();
+
+    } else {
+      
+      alert(responseBody.error.message);
+    }
+  }
+
+  
+
+			</script>
+
+			{{> layout/footer}}

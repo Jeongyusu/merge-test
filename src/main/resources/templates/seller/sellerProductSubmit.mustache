@@ -1,0 +1,473 @@
+{{> layout/header2}}
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
+      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="https://github.com/Jeongyusu/market-kurly-server" class="simple-text"> 마켓 컬리 </a>
+        </div>
+
+	      <ul class="nav">
+        {{#isAdmin}}
+		      <li>
+			      <a href="/admin">
+				      <i class="pe-7s-graph"></i>
+				      <p>판매 요청 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="/admin/question">
+				      <i class="pe-7s-news-paper"></i>
+				      <p>문의 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="/admin/coupon">
+				      <i class="pe-7s-photo-gallery"></i>
+				      <p>쿠폰 관리</p>
+			      </a>
+		      </li>
+		      <li class="active">
+			      <a href="/notice">
+				      <i class="pe-7s-note2"></i>
+				      <p>공지 목록</p>
+			      </a>
+		      </li>
+        {{/isAdmin}}
+        {{#isSeller}}
+		      <li>
+			      <a href="/seller">
+				      <i class="pe-7s-graph"></i>
+				      <p>판매 관리</p>
+			      </a>
+		      </li>
+		      <li>
+			      <a href="/seller/question">
+				      <i class="pe-7s-news-paper"></i>
+				      <p>문의 관리</p>
+			      </a>
+		      </li>
+		      <li class="active">
+			      <a href="/seller/product">
+				      <i class="pe-7s-science"></i>
+				      <p>상품 관리</p>
+			      </a>
+		      </li>
+		      <li >
+			      <a href="/notice">
+				      <i class="pe-7s-bell"></i>
+				      <p>공지 목록</p>
+			      </a>
+		      </li>
+        {{/isSeller}}
+		      <li class="active-pro">
+			      <a href="https://github.com/Jeongyusu/market-kurly-server">
+				      <i class="pe-7s-rocket"></i>
+				      <p>Link TO TeaMGit</p>
+			      </a>
+		      </li>
+	      </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="">
+                  <p>Account</p>
+                </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <p>
+                    Dropdown
+                    <b class="caret"></b>
+                  </p>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="/logout">
+                  <p>Log out</p>
+                </a>
+              </li>
+              <li class="separator hidden-lg hidden-md"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {{! 테이블 자리 }}
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12 ">
+              <h1 class="page-header">상품 등록</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+          </div>
+
+          <div class="col-md-10 container-jCenter ">
+            <div class="card login-panel panel panel-default ">
+              <div class="panel-heading">
+                <h3 class="panel-title">등록할 상품의 정보를 입력하세요</h3>
+              </div>
+              <div class="content pa-5">
+                <div>
+                  <form name="product">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="productName">product Name</label>
+                          <input type="text" class="form-control required" id="productName" placeholder="상품이름을 입력하세요"
+                            value="" required />
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="categoryId">상품 카테고리 입력</label>
+                          <select class="form-control required" id="categoryId">
+                            {{#categorys}}
+                            <option value="{{id}}">{{categoryType}}</option>
+                            {{/categorys}}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 ">
+                          <div class="form-group">
+                            <label for="productContent">product Content</label>
+                            <input type="text" id="productContent" class="form-control required"
+                              placeholder="상품설명을 입력하세요" value="" required />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="productThumbnail">상품메인 사진 입력</label>
+                            <input type="file" id="productThumbnail" class="required"
+                              onchange="previewImage('productThumbnail', 'mainPreview')" required />
+
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="productDetailPic">상품상세 사진 입력</label>
+                            <input type="file" id="productDetailPic" class="required"
+                              onchange="previewImage('productDetailPic', 'detailPreview')" required />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group ">
+                            <label>메인 미리보기 이미지</label>
+                            <div>
+                              <img id="mainPreview" style="max-width: 200px; max-height: 200px;"
+                                onclick="openImage('mainPreview')" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>상세 미리보기 이미지</label>
+                            <div>
+                              <img id="detailPreview" style="max-width: 200px; max-height: 200px;"
+                                onclick="openImage('detailPreview')" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="item form-group">
+                            <label class="label-align" for="discountExpiredAt">할인 마감일</label>
+                            <div class="">
+                              <input id="discountExpiredAt" class="date-picker form-control required"
+                                placeholder="dd-mm-yyyy" type="text" required="required" type="text"
+                                onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'"
+                                onblur="this.type='text'" onmouseout="" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="discountRate">할인율(%)</label>
+                            <input type="number" id="discountRate" class="form-control required"
+                              placeholder="0 ~ 100사이 숫자를 입력하세요" min="0" max="100" required
+                              oninput="checkDiscountRate(this)" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="content pa-5">
+                            <div>
+
+                              <button type="button" id="add-option-button">
+                                옵션 추가 버튼
+                              </button>
+
+                              <div class="card login-panel panel panel-default">
+
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                      <label for="optionName0">option Name</label>
+                                      <input type="text" class="form-control required" id="optionName0"
+                                        placeholder="옵션이름을 입력하세요" value="" required />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="optionPrice0">option price</label>
+                                      <input type="number" class="form-control required" id="optionPrice0"
+                                        placeholder="옵션가격을 입력하세요" value="" required min="0" max="1000000" />
+                                    </div>
+                                  </div>
+                                  <div class=" col-md-6">
+                                    <div class="form-group">
+                                      <label for="optionStack0">option stack</label>
+                                      <input type="number" class="form-control required" id="optionStack0"
+                                        placeholder="등록 재고 갯수를 입력하세요" value="" required min="0" max="10000" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div id="options-container"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-info btn-fill pull-right" id="submitButton">
+                        상품 승인 요청
+                      </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function previewImage(inputId, imgId) {
+        var input = document.getElementById(inputId);
+        var preview = document.getElementById(imgId);
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        if (file) {
+          reader.readAsDataURL(file);
+          reader.onload = function () {
+            preview.src = reader.result;
+          };
+        } else {
+          preview.src = ""; // 이미지가 선택되지 않은 경우 미리보기를 지우기
+        }
+      }
+
+      function openImage(imageId) {
+        var image = document.getElementById(imageId);
+        var imageURL = image.src;
+
+        if (imageURL) {
+          var newWindow = window.open('', '', 'width=800,height=600');
+          newWindow.document.write('<img src="' + imageURL + '" style="max-width: 500%; max-height: 500%;" />');
+          newWindow.resizeTo(screen.availWidth, screen.availHeight);
+
+        }
+      }
+
+
+
+      function checkDiscountRate(inputElement) {
+        const inputValue = inputElement.value;
+        if (inputValue < 0) {
+          inputElement.value = 0;
+        } else if (inputValue > 100) {
+          inputElement.value = 100;
+        }
+      }
+
+      function getCurrentDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // 0부터 시작하므로 +1
+        var yyyy = today.getFullYear();
+
+        return yyyy + '-' + mm + '-' + dd;
+      }
+
+      // 최소 날짜를 설정
+      var dateInput = document.getElementById('discountExpiredAt');
+      dateInput.min = getCurrentDate();
+
+
+      $('#categoryId').on('change', function () {
+        var selectedValue = $('#categoryId').val();
+        console.log('Selected Value: ' + selectedValue);
+      });
+
+      let nextId = 1;
+
+      document.getElementById('add-option-button').addEventListener('click', function () {
+        // 새로운 옵션을 생성
+
+        var newOption = document.createElement('div');
+        newOption.className = 'row';
+
+        // 옵션 내부의 HTML 구조 추가
+        newOption.innerHTML = `
+        
+      <div class="card login-panel panel panel-default">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="optionName`+ nextId + `">option Name</label>
+          <input type="text" class="form-control required" id="optionName`+ nextId + `" placeholder="옵션이름을 입력하세요" value="" required />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="optionPrice`+ nextId + `">option price</label>
+          <input type="number" class="form-control required" id="optionPrice`+ nextId + `" placeholder="옵션가격을 입력하세요" value="" required min="0" max="1000000" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="optionStack`+ nextId + `">option stack</label>
+          <input type="number" class="form-control required" id="optionStack`+ nextId + `" placeholder="등록 재고 갯수를 입력하세요" value="" required min="0" max="10000" />
+        </div>
+      </div>
+      </div>
+    `;
+
+        // 새로운 옵션을 컨테이너에 추가합니다.
+        document.getElementById('options-container').appendChild(newOption);
+        nextId++;
+
+      });
+
+      // 공백 검사
+      $(document).ready(function () {
+        $('#submitButton').click(async function (e) {
+          var isValid = true;
+
+          $('.required').each(function () {
+            if ($(this).val() === '') {
+              isValid = false;
+              return false;
+            }
+          });
+
+          if (isValid) {
+            saveProduct();
+            alert(' 승인 요청 되었습니다.');
+          } else {
+            alert('모든 필수 필드를 작성하세요.');
+          }
+
+        });
+
+      });
+
+
+      async function saveProduct() {
+
+        // requestBody << Body데이터 객체를 Json으로만들어 fetch를 통해 보낼 것임
+
+        let formData = new FormData();
+
+        // 파일 업로드 필드에 파일 추가
+        let productThumbnail = document.querySelector("#productThumbnail");
+        formData.append("productThumbnail", productThumbnail.files[0]);
+
+
+        let productDetailPic = document.querySelector("#productDetailPic");
+        formData.append("productDetailPic", productDetailPic.files[0]);
+
+        // 나머지 필드를 FormData에 추가
+        formData.append("productName", document.querySelector("#productName").value);
+        formData.append("productContent", document.querySelector("#productContent").value);
+        formData.append("discountRate", document.querySelector("#discountRate").value);
+        formData.append("discountExpiredAt", document.querySelector("#discountExpiredAt").value);
+        formData.append("categoryId", document.querySelector("#categoryId").value);
+
+        let optionList = [];
+
+        for (let i = 0; i < nextId; i++) {
+
+          let optionName = $(`#optionName${i}`).val();
+          let optionPrice = $(`#optionPrice${i}`).val();
+          let optionStack = $(`#optionStack${i}`).val();
+
+
+          // 객체 생성 및 배열에 추가
+          let option = {
+            optionName: optionName,
+            optionPrice: optionPrice,
+            optionStack: optionStack
+          };
+
+          optionList.push(option);
+        }
+
+        formData.append("optionList", JSON.stringify(optionList));
+
+
+        let response = await fetch("/seller/product/submit/save", {
+          method: "post",
+          headers: {
+          },
+          body: formData,
+        });
+
+        let responseBody = await response.json();
+        console.log(responseBody);
+
+        if (responseBody.success) {
+          sellerProductList();
+        } else {
+          alert(responseBody.data);
+        }
+      }
+
+      function sellerProductList() {
+        location.href = "/seller/product";
+      }
+
+
+    </script>
+
+    {{> layout/footer2}}

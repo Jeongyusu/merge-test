@@ -1,0 +1,116 @@
+{{> layout/header}}
+
+<body>
+  <div class="wrapper">
+    <div class="sidebar" data-color="purple" data-image="/assets/img/sidebar-5.jpg">
+      <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          <a href="https://github.com/Jeongyusu/market-kurly-server" class="simple-text"> 마켓 컬리 </a>
+        </div>
+
+        <ul class="nav">
+          <li class="active">
+            <a href="/login">
+              <i class="pe-7s-user"></i>
+              <p>로그인</p>
+            </a>
+          </li>
+          <li>
+            <a href="/join">
+              <i class="pe-7s-user"></i>
+              <p>회원가입</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="main-panel">
+      <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">로그인이 필요한 서비스 입니다.</a>
+          </div>
+          <div class="collapse navbar-collapse"></div>
+        </div>
+      </nav>
+
+      <div class="container-jCenter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-4">
+              <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Please Sign Innn</h3>
+                </div>
+                <div class="panel-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <input class="form-control" placeholder="User ID" id="userId" type="text" autofocus />
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" placeholder="Password" id="userPassword" type="password" value="" />
+                    </div>
+                    <div class="checkbox">
+                    </div>
+                    <!-- Change this to a button or input when using this as a form -->
+                    <input type="button" class="btn btn-lg btn-primary btn-block" value="Login"
+                      onclick="fetchLogin()" />
+                  </form>
+
+                  <div class="text-right mt-10 text-primary h8"><a href="/join">회원 가입<a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+
+  async function fetchLogin() {
+
+    let userId = $("#userId").val();
+    let userPassword = $("#userPassword").val();
+
+    let data = {
+      userId: userId,
+      userPassword: userPassword
+    };
+
+    let response = await fetch("/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    let responseBody = await response.json();
+    if (responseBody.success) {
+
+      alert("로그인 되었습니다.");
+
+      location.href = "/notice";
+
+    } else {
+      
+      alert(responseBody.error.message);
+    }
+  }
+
+</script>
+{{> layout/footer}}

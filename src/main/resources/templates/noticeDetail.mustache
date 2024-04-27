@@ -1,0 +1,59 @@
+{{> layout/header2}}
+
+<body>
+  <div class="wrapper">
+    <div class="main-panel">
+
+      <div class="pa-15">
+        <div class="card login-panel panel panel-default height-700">
+
+          <div class="panel-heading">
+            <h3 class="panel-title">공지 사항</h3>
+          </div>
+          <div class="content">
+            <form action="/admin/notice/save" method="post" enctype="application/x-www-form-urlencoded">
+              {{#notice}}
+              <div class=" row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Notice title</label>
+                    <input type="text" id="noticeTitle" class="form-control" name="noticeTitle" placeholder="공지 제목"
+                      value="{{noticeTitle}}" disabled />
+                  </div>
+                </div>
+                <div class=" pull-right mr-15">
+                  <h5>작성자 : Market Kurly </h5>
+                </div>
+
+              </div>
+
+              <div class=" row">
+                <div class="col-md-6 pull-right">
+                  <div class="form-group">
+                    <label>Notice type</label>
+                    <select class="form-control required" name="noticeType" id="noticeType" disabled>
+                      <option>{{noticeType}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class=" row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Notice Content</label>
+                    <textarea rows="10" cols="50" style="width: 570px; height: 350px; resize: none;"
+                      placeholder="공지 내용을 입력하세요" name="noticeContent" id="noticeContent"
+                      disabled>{{noticeContent}}</textarea>
+                  </div>
+                </div>
+              </div>
+              {{/notice}}
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+
+      {{> layout/footer}}
